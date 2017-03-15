@@ -359,7 +359,7 @@ def create(vm_):
             for iface_xml in domain_xml.findall('./devices/interface'):
                 iface_xml.remove(iface_xml.find('./mac'))
                 # enable IP learning, this might be a default behaviour...
-                if iface_xml.find("./filterref/parameter[@name='CTRL_IP_LEARNING']") is None:
+                if ip_source == "ip-learning" and iface_xml.find("./filterref/parameter[@name='CTRL_IP_LEARNING']") is None:
                     iface_xml.append(ElementTree.fromstring(IP_LEARNING_XML))
 
             # If a qemu agent is defined we need to fix the path to its socket
